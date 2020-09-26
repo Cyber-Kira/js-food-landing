@@ -67,6 +67,12 @@ gulp.task("server", () => {
               .pipe(gulp.dest(dist + '/js'))
               .pipe(browsersync.stream());
 });
+
+gulp.task("db", () => {
+  return gulp.src("./db.json")
+              .pipe(gulp.dest(dist))
+              .pipe(browsersync.stream());
+});
 gulp.task("watch", () => {
 
     gulp.watch("./src/index.html", gulp.parallel("copy-html"));
@@ -75,9 +81,10 @@ gulp.task("watch", () => {
     gulp.watch("./src/scss/**/*.scss", gulp.parallel("build-sass"));
     gulp.watch("./src/js/**/*.js", gulp.parallel("build-js"));
     gulp.watch("./src/js/**/*.php", gulp.parallel("server"));
+    gulp.watch("./src/js/**/*.php", gulp.parallel("db"));
 });
 
-gulp.task("build", gulp.parallel("copy-html", "copy-assets", "build-sass", "build-js", "server"));
+gulp.task("build", gulp.parallel("copy-html", "copy-assets", "build-sass", "build-js", "server", "db"));
 
 gulp.task("prod", () => {
     gulp.src("./src/index.html")
