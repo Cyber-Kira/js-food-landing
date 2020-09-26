@@ -26,5 +26,8 @@
     "webpack-cli": "^3.3.10",
     "webpack-stream": "^5.2.1"
   },
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "jshint": "^2.12.0"
+  }
 }
