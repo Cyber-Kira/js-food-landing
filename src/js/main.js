@@ -291,60 +291,50 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Slider
 
-  let currentSlide = document.querySelector('#current'),
-        totalSlides = document.querySelector('#total'),
-        slides = document.querySelectorAll('.offer__slide'),
-        next = document.querySelector('.offer__slider-next'),
-        prev = document.querySelector('.offer__slider-prev');
-  let currentSlideNum = +currentSlide.textContent,
-      totalSlidesNum = +totalSlides.textContent;
+  const slides = document.querySelectorAll('.offer__slide'),
+    prev = document.querySelector('.offer__slider-prev'),
+    next = document.querySelector('.offer__slider-next'),
+    total = document.querySelector('#total'),
+    current = document.querySelector('#current');
+  let slideIndex = 1;
 
-  totalSlides.textContent = getZero(slides.length);
+  showSlides(slideIndex);
 
-  const hideSlides = () => {
-    slides.forEach(slide => {
-      slide.classList.add('hide');
-    });
-  };
+  if (slides.length < 10) {
+    total.textContent = `0${slides.length}`;
+  } else {
+    total.textContent = slides.length;
+  }
 
-  const showSlide = (currentSlide) => {
-    slides.forEach((slide, i) => {
-      if ((i + 1) === currentSlide) {
-        slide.classList.add('show');
-        slide.classList.remove('hide');
-      }
-    });
-  };
-
-  hideSlides();
-  showSlide(currentSlideNum);
-
-  next.addEventListener('click', () => {
-    if (currentSlideNum + 1 > totalSlidesNum) {
-      currentSlideNum = 1;
-      currentSlide.textContent = getZero(currentSlideNum);
-      hideSlides();
-      showSlide(currentSlideNum);
-    } else {
-      currentSlideNum += 1;
-      currentSlide.textContent = getZero(currentSlideNum);
-      hideSlides();
-      showSlide(currentSlideNum);
+  function showSlides(n) {
+    if (n > slides.length) {
+      slideIndex = 1;
     }
-  });
+    if (n < 1) {
+      slideIndex = slides.length;
+    }
+
+    slides.forEach(item => item.classList.add('hide'));
+
+    slides[slideIndex - 1].classList.add('show');
+    slides[slideIndex - 1].classList.remove('hide');
+
+    if (slides.length < 10) {
+      current.textContent = `0${slideIndex}`;
+    } else {
+      current.textContent = slideIndex;
+    }
+  }
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
 
   prev.addEventListener('click', () => {
-    console.log(currentSlideNum);
-    if (currentSlideNum === 1) {
-      currentSlideNum = totalSlidesNum;
-      currentSlide.textContent = getZero(currentSlideNum);
-      hideSlides();
-      showSlide(currentSlideNum);
-    } else {
-      currentSlideNum -= 1;
-      currentSlide.textContent = getZero(currentSlideNum);
-      hideSlides();
-      showSlide(currentSlideNum);
-    }
+    plusSlides(-1);
+  });
+
+  next.addEventListener('click', () => {
+    plusSlides(1);
   });
 });
