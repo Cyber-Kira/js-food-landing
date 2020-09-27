@@ -364,4 +364,36 @@ window.addEventListener('DOMContentLoaded', () => {
       current.textContent = slideIndex;
     }
   });
+
+  // SliderDots
+
+  const slider = document.querySelector('.offer__slider');
+
+  slider.style.position = 'relative';
+
+  const dotsWrapper = document.createElement('div');
+  dotsWrapper.classList.add('carousel-indicators');
+  slider.append(dotsWrapper);
+  
+  for(let i = 0; i < +total.textContent; i += 1) {
+    const dot = document.createElement('div');
+    dot.classList.add('dot');
+    dotsWrapper.append(dot);
+  }
+
+  const dots = document.querySelectorAll('.dot');
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', (e) => {
+      offset = +width.slice(0, width.length - 2);
+      slidesField.style.transform = `translateX(-${offset * i}px)`;
+      offset = offset * i;
+      slideIndex = i + 1;
+      if (slides.length < 10) {
+        current.textContent = `0${slideIndex}`;
+      } else {
+        current.textContent = slideIndex;
+      }
+    });
+  });
 });
