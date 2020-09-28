@@ -63,8 +63,8 @@ gulp.task("copy-assets", () => {
 });
 
 gulp.task("server", () => {
-  return gulp.src("./src/js/**/*.php")
-              .pipe(gulp.dest(dist + '/js'))
+  return gulp.src("./src/**/*.php")
+              .pipe(gulp.dest(dist))
               .pipe(browsersync.stream());
 });
 
