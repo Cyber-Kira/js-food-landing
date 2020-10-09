@@ -30,21 +30,10 @@ const getZero = (number) => {
         return `0${number}`;
     }
     return number;
-}
-
-const setNumber = (numberId, newNumber, options) => {
-    let counter = new CountUp(numberId, newNumber, options);
-
-    if (!counter.error) {
-        counter.start();
-    } else {
-        console.error(counter.error);
-    }
 };
 
 export {
     postData,
     getResource,
-    getZero,
-    setNumber
+    getZero
 };

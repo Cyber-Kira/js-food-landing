@@ -1,7 +1,3 @@
-import {
-    setNumber
-} from '../services/services';
-
 function calc() {
     const result = document.querySelector('.calculating__result span');
 
@@ -57,12 +53,10 @@ function calc() {
 
         if (sex === 'female') {
             const calculatedCalories = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
-            setNumber('calories', calculatedCalories, options);
-            options.startVal = calculatedCalories;
+            result.textContent = calculatedCalories;
         } else {
             const calculatedCalories = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
-            setNumber('calories', calculatedCalories, options);
-            options.startVal = calculatedCalories;
+            result.textContent = calculatedCalories;
         }
     }
 
