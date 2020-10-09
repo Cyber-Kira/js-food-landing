@@ -1,3 +1,5 @@
+import { getZero } from '../services/services';
+
 function timer(id, deadline) {
     function getTimeRemaining(endtime) {
         const total = Date.parse(endtime) - Date.parse(new Date()),
@@ -13,13 +15,6 @@ function timer(id, deadline) {
             minutes,
             seconds
         };
-    }
-
-    function getZero(number) {
-        if (number >= 0 && number < 10) {
-            return `0${number}`;
-        }
-        return number;
     }
 
     function setClock(selector, endtime) {

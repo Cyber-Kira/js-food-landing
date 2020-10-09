@@ -1,3 +1,7 @@
+import {
+    CountUp
+} from 'countup.js';
+
 const postData = async (url, data) => {
     const res = await fetch(url, {
         method: "POST",
@@ -20,7 +24,27 @@ const getResource = async (url) => {
     return await res.json();
 };
 
+
+const getZero = (number) => {
+    if (number >= 0 && number < 10) {
+        return `0${number}`;
+    }
+    return number;
+}
+
+const setNumber = (numberId, newNumber, options) => {
+    let counter = new CountUp(numberId, newNumber, options);
+
+    if (!counter.error) {
+        counter.start();
+    } else {
+        console.error(counter.error);
+    }
+};
+
 export {
     postData,
-    getResource
+    getResource,
+    getZero,
+    setNumber
 };

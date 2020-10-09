@@ -1,3 +1,7 @@
+import {
+    setNumber
+} from '../services/services';
+
 function calc() {
     const result = document.querySelector('.calculating__result span');
 
@@ -6,6 +10,12 @@ function calc() {
         weight,
         age,
         ratio;
+
+    let options = {
+        startVal: 0,
+        duration: 1,
+        useGrouping: false,
+    };
 
     if (localStorage.getItem('sex')) {
         sex = localStorage.getItem('sex');
@@ -46,9 +56,13 @@ function calc() {
         }
 
         if (sex === 'female') {
-            result.textContent = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
+            const calculatedCalories = Math.round((447.6 + (9.2 * weight) + (3.1 * height) - (4.3 * age)) * ratio);
+            setNumber('calories', calculatedCalories, options);
+            options.startVal = calculatedCalories;
         } else {
-            result.textContent = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
+            const calculatedCalories = Math.round((88.36 + (13.4 * weight) + (4.8 * height) - (5.7 * age)) * ratio);
+            setNumber('calories', calculatedCalories, options);
+            options.startVal = calculatedCalories;
         }
     }
 

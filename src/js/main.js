@@ -8,9 +8,18 @@ import slider from './modules/slider';
 import {
     openModal
 } from './modules/modal';
+import { getZero } from './services/services';
 
 window.addEventListener('DOMContentLoaded', () => {
-    const modalTimerId = setTimeout(() =>
+
+    const deadline = () => {
+        const day = getZero(new Date().getDate() + 8);
+        const month = getZero(new Date().getMonth() + 1);
+        const year = new Date().getFullYear();
+        return `${year}-${month}-${day}`;
+    };
+
+    const modalTimerId = setTimeout(() => 
         openModal('.modal', modalTimerId), 10000);
 
     tabs('.tabheader__item',
@@ -18,7 +27,7 @@ window.addEventListener('DOMContentLoaded', () => {
         '.tabheader__items',
         'tabheader__item_active');
     modal('[data-modal]', '.modal', modalTimerId);
-    timer('.timer', '2020-11-20');
+    timer('.timer', deadline());
     cards();
     calc();
     forms('form', modalTimerId);
